@@ -6,5 +6,5 @@ const router =express.Router()
 router.get('/signup', signIn)
  
 
-
-export default router
+   
+export default router 
