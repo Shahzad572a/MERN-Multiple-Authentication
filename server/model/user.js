@@ -3,39 +3,35 @@ import crypto from 'crypto'
 
 // ??user schema 
 const userSchema = new mongoose.Schema({
-    name:{
+    name: {
         type: String,
         trim: true,
         required: true,
-        maxlength:32
+        maxlength: 32
     },
-
-    email:{
+    email: {
         type: String,
         trim: true,
         required: true,
-        unique:true,
-        lowercase:true
+        unique: true,
+        lowercase: true
     },
-
-    hashed_password:{
+    hashed_password: {
         type: String,
         required: true,
-       
     },
-
-    salt:  String,
-
-    role:{
+    salt: String,
+    role: {
         type: String,
-        default:'subscriber',
+        default: 'subscriber',
     },
-    resetPasswordLink:{
-        data: String,
-        default:'',
-    },
-              
-},{timestamps:true})
+    resetPasswordLink: {
+        data: {
+            type: String,
+            default: ''
+        }
+    }
+}, { timestamps: true });
 
 // virtual
 userSchema.virtual('password')
@@ -73,6 +69,6 @@ userSchema.methods ={
     }
 }
 
-const userModel = mongoose.model('User', userSchema);   
+const UserModel = mongoose.model('User', userSchema);   
 
-export default userModel;
+export default UserModel;

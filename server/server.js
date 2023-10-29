@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import database from './config/database.js';
 import colors from 'colors';
 import authRoutes from './routes/auth.js';
+// const authRoutes = require('./routes/auth.js');
 
 dotenv.config();
 database();

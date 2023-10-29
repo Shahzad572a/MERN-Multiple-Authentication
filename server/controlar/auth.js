@@ -1,13 +1,28 @@
 import express from "express";
-// import userModle from "../model/user.js";
+import UserModel from "../model/user.js";
 
-export const signIn = async (req,res) => {
-     try {
-         
-        res.status(200).json({
-            data: 'you hit signup endpoint'
+export const signUp = async (req,res) => {
+ 
+      const { name, email, password } = req.body
+    
+      const userExists = await UserModel.findOne({ email })
+      if (userExists) {
+        res.status(400)
+        throw new Error('User already exists')
+      }
+      const user = await UserModel.create({
+        name,
+        email,
+        password,
+      })
+      if (user) {
+        res.status(201).json({
+          success: true
         })
-     } catch (error) {
-        res.status(404).json({message:error.message})
-     }
+      } else {
+        res.status(400)
+        throw new Error('Invalid user data')
+      }
     }
+
+    
